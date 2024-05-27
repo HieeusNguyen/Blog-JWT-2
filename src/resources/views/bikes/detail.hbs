@@ -1,0 +1,68 @@
+<div>
+    <h1>{{bike.name}}</h1>
+    <p>{{bike.description}}</p>
+    <form id="addOrder">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="99" value="1" >
+        <button type="submit" class="btn btn-success">ADD TO CART</button>
+    </form>
+</div>
+
+<script>
+const form = document.querySelector('form');
+
+ form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const quantity = document.querySelector('#quantity').value;
+    if(!quantity){
+        Swal.fire({
+            title: 'Error!',
+            text: 'Please enter product quantity!',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        })
+        return
+    }
+
+    const slugProduct = "{{bike.slug}}"
+    $.ajax({
+        url: `order/${slugProduct}`,
+        method: "POST",
+        data: {
+            quantity: $('#quantity').val()
+        },
+        success: function(response){
+            if(response.message == "Success"){
+                Swal.fire({
+                    title: response.message,
+                    icon: "success",
+                    timer: 200,
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                    willClose: () => {
+                        window.location.href = "back"
+                    }
+                })
+            }else if(response.message == "Update success"){
+                Swal.fire({
+                    title: response.message,
+                    icon: "success",
+                    timer: 200,
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                    willClose: () => {
+                        window.location.href = "back"
+                    }
+                })
+            }
+        }
+    })
+ })
+</script>

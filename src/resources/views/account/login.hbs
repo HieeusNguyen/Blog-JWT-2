@@ -1,0 +1,69 @@
+<div class="container">
+<div class="login col-lg-7">
+    <form method="POST" action="/auth/login" class="px-4 py-3">
+        <h2>LOGIN</h2>
+        <div class="form-group">
+            <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email"
+                name="email"
+            />
+            <div class="email error"></div>
+        </div>
+        <div class="form-group">
+            <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+                name="password"
+            />
+             <div class="password error"></div>
+        </div>
+        <a class="forgot-password" href="#!">Forgot your password?</a>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <a class="sign-up text-align-center" href="/account/register">Sign up</a>
+</div>
+</div>
+
+<script>
+  const form = document.querySelector('form');
+  const emailError = document.querySelector('.email.error');
+  const passwordError = document.querySelector('.password.error');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // reset errors
+    emailError.textContent = '';
+    passwordError.textContent = '';
+
+    // get values
+    const email = form.email.value;
+    const password = form.password.value;
+
+    try {
+      const res = await fetch('/auth/login', { 
+        method: 'POST', 
+        body: JSON.stringify({ email, password }),
+        headers: {'Content-Type': 'application/json'}
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.errors) {
+        emailError.textContent = data.errors.email;
+        passwordError.textContent = data.errors.password;
+      }
+      if (data.user) {
+        location.assign('/');
+      }
+
+    }
+    catch (err) {
+      console.log(err);
+    }
+  });
+</script>

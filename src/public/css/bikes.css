@@ -1,0 +1,57 @@
+.header-product-bikes {
+  height: 200px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.sticky {
+  position: sticky;
+  width: 20%;
+  height: 100%;
+  top: 40px;
+  float: left;
+}
+
+.main-product-bikes {
+  display: flex;
+  height: auto;
+}
+
+.sticky li {
+  padding: 10px 0px;
+  display: inline-block;
+  width: 100%;
+  line-height: center;
+  padding-left: 20px;
+  font-weight: bold;
+}
+
+.sticky li i {
+  float: right;
+  font-size: 20px;
+}
+
+.sticky li:hover i {
+  color: #ccc;
+}
+
+.product-list {
+  width: 80%;
+  float: right;
+}
+
+.card-item {
+  border: 0px;
+  margin: 25px;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+}
+
+.card-item:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../resources/scss/bikes.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAEA;EACI;EACA;EACA;EACA;;;AAKF;EACE;EACA;EACA;EACA;EACA;;;AAEF;EACE;EACA;;;AAEF;EACE;EACA;EACA;EACA;EACA;EACA;;;AAGF;EACE;EACA;;;AAGF;EACE;;;AAIF;EACE;EACA;;;AAEF;EACE;EACA;EACA;EACA;EACA;;;AAGF;EACE;EACA%22,%22file%22:%22bikes.css%22%7D */

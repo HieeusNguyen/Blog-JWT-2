@@ -1,0 +1,84 @@
+<main>
+    <div class="header-product-bikes">
+        <h1 style="font-size: 4rem;"><Strong>BIKES</Strong></h1>
+    </div>
+    <div class="main-product-bikes">
+
+        {{! MENU PRODUCT }}
+
+        <div class="menu-product sticky">
+            <ul>
+                <li>
+                    Filters
+                    <i class="fa-solid fa-sliders"></i>
+                </li>
+                <hr />
+                <li>
+                    In stock only
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </li>
+                <hr />
+                <li>
+                    Size
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </li>
+                <hr />
+
+                <li>
+                    Price
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </li>
+                <hr />
+
+                <li>
+                    Intended Use
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </li>
+                <hr />
+
+                <li>
+                    Wheel Size
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </li>
+                <hr />
+
+                <li>
+                    Suspension
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </li>
+                <hr />
+
+                <li>
+                    Model Year / Edition
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                </li>
+                <hr />
+                <li>
+                    Product type
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                    <hr />
+                </li>
+            </ul>
+        </div>
+
+        {{! PRODUCT LIST }}
+
+        <div class="product-list row">
+            {{#each bike}}
+                <a href="/collection/{{this.slug}}" class="card-item card" style="width: 300px; height:300px">
+                    <img
+                        class="card-img-top"
+                        src="{{this.image}}"
+                        alt="Card image cap"
+                    />
+                    <div class="card-body">
+                        <p
+                            class="card-text text-center font-weight-bold"
+                        >{{this.name}}</p>
+                        <p class="card-text text-center">${{this.price}} USD</p>
+                    </div>
+                </a>
+            {{/each}}
+        </div>
+    </div>
+</main>

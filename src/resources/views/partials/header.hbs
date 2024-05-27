@@ -1,0 +1,206 @@
+<header class="header row justify-content-between align-items-center">
+    {{! Logo }}
+    <a class="navbar-brand" href="/">
+        <img
+            src="http://localhost:3000/img/LOGO.png"
+            alt="XeDap.vn"
+            class="logo"
+        />
+    </a>
+    {{! Navigation }}
+    <nav class="navbar justify-content-between">
+        <ul class="menu row align-items-center">
+            <li>
+                <a href="/collection/bike">BIKES</a>
+                <i
+                    class="fa-solid fa-chevron-down fa-2xs"
+                    style="color: #ffffff;"
+                ></i>
+            </li>
+            <li>
+                <a href="#!">PARTS</a>
+                <i
+                    class="fa-solid fa-chevron-down fa-2xs"
+                    style="color: #ffffff;"
+                ></i>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#!">FRAME</a>
+                    </li>
+                    <li>
+                        <a href="#!">PEDALS & GRIPS</a>
+                    </li>
+                    <li>
+                        <a href="#!">ALL PARTS</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#!">GEAR</a>
+                <i
+                    class="fa-solid fa-chevron-down fa-2xs"
+                    style="color: #ffffff;"
+                ></i>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#!">RIDING GEAR</a>
+                    </li>
+                    <li>
+                        <a href="#!">APPAREL</a>
+                    </li>
+                    <li>
+                        <a href="#!">TOOLS</a>
+                    </li>
+                    <li>
+                        <a href="#!">ALL GEAR</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#!">SALE</a>
+            </li>
+            <li>
+                <a href="#!">DEALERS</a>
+                <i
+                    class="fa-solid fa-chevron-down fa-2xs"
+                    style="color: #ffffff;"
+                ></i>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#!">DEALER LOCATOR</a>
+                    </li>
+                    <li>
+                        <a href="#!">DISTRIBUTIONS</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#!">TEAMS</a>
+                <i
+                    class="fa-solid fa-chevron-down fa-2xs"
+                    style="color: #ffffff;"
+                ></i>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#!">FACTORY</a>
+                    </li>
+                    <li>
+                        <a href="#!">PRO DEVELOPMENT</a>
+                    </li>
+                    <li>
+                        <a href="#!">ADVOCACY</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    {{! Tool-Right }}
+    <ul class="tool-right row">
+        <li>
+            <a href="#!">
+                <i
+                    class="fa-solid fa-magnifying-glass fa-lg"
+                    style="color: #ffffff;"
+                ></i>
+            </a>
+        </li>
+        <li>
+            <a href="#!" class="cart-button">
+                <i
+                    class="fa-solid fa-cart-shopping fa-lg"
+                    style="color: #ffffff;"
+                ></i>
+            </a>
+        </li>
+        <li>
+            {{#if user}}
+                <a href="#!" class="avatar">
+                    <img src="{{user.avatar}}" alt="{{user.name}}" />
+                </a>
+                {{#if admin}}
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="#!">PRODUCT MANAGEMENT</a>
+                        </li>
+                        <li>
+                            <a href="#!">USER MANAGEMENT</a>
+                        </li>
+                        <li>
+                            <a href="/auth/logout">LOG OUT</a>
+                        </li>
+                    </ul>
+                {{else}}
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="#!">MY PROFILE</a>
+                        </li>
+                        <li>
+                            <a href="#!">PRO DEVELOPMENT</a>
+                        </li>
+                        <li>
+                            <a href="/auth/logout">LOG OUT</a>
+                        </li>
+                    </ul>
+                {{/if}}
+            {{else}}
+                <a href="#!">
+                    <i
+                        class="fa-regular fa-user fa-lg"
+                        style="color: #ffffff;"
+                    ></i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/auth/login">LOG IN</a>
+                    </li>
+                    <li>
+                        <a href="/auth/signup">SIGN UP</a>
+                    </li>
+                </ul>
+            {{/if}}
+        </li>
+    </ul>
+    {{! Cart }}
+    <div class="cart-container">
+        <div class="cart-content">
+            <div class="cart-drawer-top justify-content-between">
+                <span class="cart">CART</span>
+                <button class="close-btn"><i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="line-item row">
+                <div class="image col-lg-3">
+                    <img src="https://cdn.shopify.com/s/files/1/0589/9521/2332/products/my23_mahuna.jpg?v=1675889584&width=96" alt="">
+                </div>
+                <div class="info col-lg-3">
+                    <a href="#!">
+                        <span class="name">Mahuna</span>
+                    </a>
+                    <span class="price">$1,199.00 USD</span>
+                    <p class="size">MD</p>
+                </div>
+                <div class="action quantity col-lg-6">
+                    <input type="number" max="99" size="1" value="1">
+                    <span class="remove"><a href="#!">Remove</a></span>
+                </div>
+            </div>
+            <div class="cart-drawer-bottom">
+                <div class="top">
+                    <h5>TOTAL</h5>
+                    <span><h5>$1,199.00 USD</h5></span>
+                </div>
+                <p class="text">Taxes and shipping calculated at checkout</p>
+                <a href="#!" class="button">View Cart</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const cartContainer = document.querySelector('.cart-container'); 
+        const cartButton = document.querySelector('.cart-button');
+        const closeButton = document.querySelector('.close-btn');
+        cartButton.addEventListener('click', () => {
+        cartContainer.style.transform = 'translateX(0)'; });
+        closeButton.addEventListener('click', () => {
+        cartContainer.style.transform = 'translateX(100%)'; });
+    </script>
+</header>
