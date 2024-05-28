@@ -1,0 +1,80 @@
+
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Thông tin khách hàng</h3>
+                <form id="createOrder" action="create_payment_url" method="POST">
+                    <div class="form-group">
+                        <label for="name">Họ tên</label>
+                        <input type="text" class="form-control" id="name" >
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Điện thoại</label>
+                        <input type="text" class="form-control" id="phone" >
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email">
+                    </div>
+                    
+                    <div class="form-group">
+                <label>Số tiền</label>
+                <input readonly class="form-control" id="amount" name="amount" placeholder="Số tiền" value="{{totalPrice data}}">
+            </div>
+                    <div class="form-group">
+                        
+                <label>Chọn Phương thức thanh toán:</label>
+                <div class="controls">
+                    <label class="radio-inline">
+                        <input type="radio" name="bankCode" id="defaultPaymentMethod" value="" checked="true"> Cổng thanh toán VNPAYQR
+                    </label>
+                </div>
+                <div class="controls">
+                    <label class="radio-inline">
+                        <input type="radio" name="bankCode" id="vnpayqrPaymentMethod" value="VNPAYQR"> Thanh toán qua ứng dụng hỗ trợ VNPAYQR
+                    </label>
+                </div>
+                <div class="controls">
+                    <label class="radio-inline">
+                        <input type="radio" name="bankCode" id="vnbankPaymentMethod" value="VNBANK"> Thanh toán qua ATM-Tài khoản ngân hàng nội địa
+                    </label>
+                </div>
+                <div class="controls">
+                    <label class="radio-inline">
+                        <input type="radio" name="bankCode" id="intcardPaymentMethod" value="INTCARD"> Thanh toán qua thẻ quốc tế
+                    </label>
+                </div>
+            </div>
+                    <button type="submit" class="btn btn-primary">Đặt hàng</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h3>Giỏ hàng</h3>
+                <ul class="list-group">
+                    {{#each data}}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{this.name}}
+                        <span>{{this.price}}</span>
+                    </li>
+                    {{/each}}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Tổng thành tiền
+                        <strong>{{totalPrice data}}</strong>
+                    </li>
+                </ul>
+                <div class="mt-3">
+                    <label for="promoCode">Mã khuyến mãi</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="promoCode">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

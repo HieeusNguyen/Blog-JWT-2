@@ -5,6 +5,7 @@ const meRouter = require("./me");
 const authRouter = require("./auth")
 const bikeRouter = require("./bike")
 const { requireAuth, checkUser } = require("../middlewares/UserMiddlewares");
+const cartRouter = require("./cart")
 
 function route(app) {
     app.get('*', checkUser);
@@ -13,6 +14,7 @@ function route(app) {
     app.use("/news",requireAuth, newsRouter);
     app.use("/courses", courseRouter);
     app.use("/me", meRouter);
+    app.use("/cart", cartRouter);
     app.use("/", siteRouter);
 }
 

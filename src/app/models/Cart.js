@@ -6,12 +6,12 @@ mongoose.plugin(slug);
 
 const Cart = new Schema(
     {
-        userId:{type: Schema.Types.ObjectId, ref:'User'},
-        name: {type: String},
-        image: {type: String},
-        price: {type: Number},
+        userId:{type: mongoose.Types.ObjectId},
+        productId: {type: mongoose.Types.ObjectId},
+        name: String,
+        price: Number,
+        image: String,
         quantity: {type: Number},
-        Info: {type: String}
     },
     { timestamps: true }
 );

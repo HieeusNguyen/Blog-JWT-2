@@ -1,0 +1,11 @@
+
+ {{#each data}}
+    <p>{{this.name}}</p>
+    <p>{{this.quantity}}</p>
+    <p>{{multiple this.price this.quantity}}</p>
+    <p>{{this._id}}</p>
+    <a href="/cart/remove/{{this._id}}">remove</a>
+  {{/each}}
+  <p>Total: {{totalPrice data}}</p>
+  
+  <a href="/cart/checkout">Checkout</a>

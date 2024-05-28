@@ -9,6 +9,7 @@ const port = 3000;
 const route = require("./routes/");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const Handlebars = require('handlebars');
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -39,9 +40,20 @@ app.engine(
         extname: ".hbs",
         helpers: {
             sum: (a, b) => a + b,
+            multiple: (a, b) => a * b,
         },
     })
 );
+Handlebars.registerHelper('totalPrice', function(data) {
+    let total = 0;
+    data.forEach(item => {
+      total += item.price * item.quantity;
+    });
+    return total;
+    });
+    Handlebars.registerHelper('eq', function(a, b) {
+        return a === b;
+    });
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/views"));
 

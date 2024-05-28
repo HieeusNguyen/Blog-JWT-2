@@ -1,9 +1,11 @@
 <div>
     <h1>{{bike.name}}</h1>
     <p>{{bike.description}}</p>
+    <p></p>
     <form id="addOrder">
         <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" min="1" max="99" value="1" >
+        <input type="number" id="quantity" name="quantity" min="1" max="99" value="1">
+        <input type="hidden" value="{{bike._id}}" name="idProduct" id="idProduct" >
         <button type="submit" class="btn btn-success">ADD TO CART</button>
     </form>
 </div>
@@ -13,10 +15,10 @@ const form = document.querySelector('form');
 
  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const quantity = document.querySelector('#quantity').value;
+
     if(!quantity){
-        Swal.fire({
+        await Swal.fire({
             title: 'Error!',
             text: 'Please enter product quantity!',
             icon: 'error',
@@ -24,45 +26,21 @@ const form = document.querySelector('form');
         })
         return
     }
+    const productId = document.querySelector('#idProduct').value
+    const dataCart = {productId, quantity}
+    try {
+      const res = await fetch(`/cart/order`, { 
+        method: 'POST', 
+        body: JSON.stringify(dataCart),
+        headers: {'Content-Type': 'application/json'}
+      });
+      location.assign('/cart/order');
 
-    const slugProduct = "{{bike.slug}}"
-    $.ajax({
-        url: `order/${slugProduct}`,
-        method: "POST",
-        data: {
-            quantity: $('#quantity').val()
-        },
-        success: function(response){
-            if(response.message == "Success"){
-                Swal.fire({
-                    title: response.message,
-                    icon: "success",
-                    timer: 200,
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    },
-                    willClose: () => {
-                        window.location.href = "back"
-                    }
-                })
-            }else if(response.message == "Update success"){
-                Swal.fire({
-                    title: response.message,
-                    icon: "success",
-                    timer: 200,
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    },
-                    willClose: () => {
-                        window.location.href = "back"
-                    }
-                })
-            }
-        }
-    })
+    }
+    catch (err) {
+      console.log(err);
+    }
+    
  })
+
 </script>
