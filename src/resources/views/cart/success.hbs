@@ -1,10 +1,14 @@
 <div class="content">
     {{#if (eq code "00")}}
-        <p style="text-align: center;">GD thành công</p>
+        <p style="text-align: center;">Giao Dịch thành công</p>
+        <p style="text-align: center;">
+        <a class="btn btn-default" href="/cart">Về trang chủ</a>
+        </p>
     {{else}}
         <p style="text-align: center; color: red;">GD thất bại</p>
+        <p style="text-align: center;">
+        <a class="btn btn-default" href="/">Về trang chủ</a>
+        </p>
     {{/if}}
-    <p style="text-align: center;">
-        <a class="btn btn-default" href="/order">Về danh sách</a>
-    </p>
+    
 </div>

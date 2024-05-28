@@ -1,14 +1,13 @@
 const { decode } = require("jsonwebtoken");
 const Cart = require("../models/Cart");
 const mongoose = require("mongoose");
-const { mongooseToObject, mutipleMongooseToObject } = require("../../util/mongoose");
+const { mutipleMongooseToObject } = require("../../util/mongoose");
 const Bike = require("../models/Bike");
-const { convertToObjectId } = require("../../util/objectId");
 class CartController {
     // GET /me/stored/courses
     async addToCart(req, res, next) {
         const { productId, quantity } = req.body;
-        const userId = decode(req.cookies.jwt).id;
+        const userId = decode(req.cookies.jwt).id
        const dataBike = await Bike.findOne({_id:new mongoose.Types.ObjectId(productId)})
         const formData = {
             productId: new mongoose.Types.ObjectId(productId),
@@ -49,7 +48,7 @@ class CartController {
         const userId = decode(req.cookies.jwt).id;
         Cart.find({userId})
         .then((data) => {
-            console.log(data)
+            console.log(data,"checkout")
             res.render("cart/checkout", {data: mutipleMongooseToObject(data)})
         })
     }

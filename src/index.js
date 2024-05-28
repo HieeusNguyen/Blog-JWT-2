@@ -54,6 +54,9 @@ Handlebars.registerHelper('totalPrice', function(data) {
     Handlebars.registerHelper('eq', function(a, b) {
         return a === b;
     });
+    Handlebars.registerHelper('jsonStringify', function(context) {
+        return JSON.stringify(context);
+    });
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/views"));
 

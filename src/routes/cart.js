@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const cartControllers = require("../app/controllers/CartController");
+const { default: mongoose } = require("mongoose");
+const Invoice = require("../app/models/Invoice");
+const Cart = require("../app/models/Cart");
 
 router.post("/order", cartControllers.addToCart);
 router.get("/order", cartControllers.getCart)
@@ -76,6 +79,25 @@ router.post('/create_payment_url', function (req, res, next) {
 
     vnp_Params = sortObject(vnp_Params);
 
+    const dataInvoice = {
+        userId: JSON.parse(req.body.items)[0].userId,
+        name: req.body.name,
+        items: JSON.parse(req.body.items),
+        address: req.body.address,
+        email: req.body.email,
+        phone: req.body.phone,
+        totalAmount: Number(req.body.amount)
+    }
+
+    const invoice = new Invoice(dataInvoice);
+        invoice.save()
+        .then()
+        .catch(next);
+
+        Cart.deleteMany({userId: new mongoose.Types.ObjectId(JSON.parse(req.body.items)[0].userId)})
+        .then()
+        .catch(next)
+
     var querystring = require('qs');
     var signData = querystring.stringify(vnp_Params, { encode: false });
     var crypto = require("crypto");     
@@ -83,8 +105,6 @@ router.post('/create_payment_url', function (req, res, next) {
     var signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex"); 
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
-
-
 
     res.redirect(vnpUrl)
 });
@@ -134,7 +154,6 @@ router.get('/vnpay_return', function (req, res, next) {
     var signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");     
 
     if(secureHash === signed){
-        //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
 
         res.render('cart/success', {code: vnp_Params['vnp_ResponseCode']})
     } else{
