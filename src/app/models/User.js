@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema({
     avatar:{
         type: String,
         default:"https://sme.hust.edu.vn/wp-content/uploads/2022/02/Avatar-Facebook-trang.jpg"
+    },
+    admin:{
+        type: Boolean,
+        default: false
     }
 });
 

@@ -1,0 +1,34 @@
+<div class="mt-4 container">
+    <h3>Update Product</h3>
+    <form method="POST" action="/collection/update/{{bike._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{bike.name}}" />
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input
+                type="text"
+                class="form-control"
+                id="description"
+                name="description"
+                value="{{bike.description}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="videoId">Image</label>
+            <input
+                type="text"
+                class="form-control"
+                id="image"
+                name="image"
+                value="{{bike.image}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="level">Price</label>
+            <input type="text" class="form-control" id="price" name="price" value="{{bike.price}}" />
+        </div>
+        <button type="submit" class="btn btn-primary">Update Product</button>
+    </form>
+</div>

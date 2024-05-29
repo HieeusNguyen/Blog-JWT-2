@@ -33,6 +33,34 @@ class BikeController {
             .then(() => res.redirect("/collection/bike"))
             .catch(next);
     }
+
+    all_product(req,res, next){
+        Bike.find()
+            .then((bike) =>
+                res.render("manager/showBike", { bike: mutipleMongooseToObject(bike) })
+            )
+            .catch(next);
+    }
+
+    edit(req,res,next){
+        Bike.findById(req.params.id)
+            .then((bike) =>
+                res.render("manager/updateBike", { bike: mongooseToObject(bike) })
+            )
+            .catch(next);
+    }
+
+    update(req, res, next){
+        Bike.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect("/collection/all-product"))
+                .catch(next);
+    }
+
+    delete(req, res, next){
+        Bike.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
 }
 
 module.exports = new BikeController();
