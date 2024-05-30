@@ -2,13 +2,14 @@
     {{#if (eq code "00")}}
         <p style="text-align: center;">Giao Dịch thành công</p>
         <p style="text-align: center;">
-        <a class="btn btn-default" href="/cart">Về trang chủ</a>
+            <a class="btn btn-default" href="/invoice/update-completed/{{invoice}}">Về trang chủ</a>
+            {{invoice}}
         </p>
     {{else}}
         <p style="text-align: center; color: red;">GD thất bại</p>
         <p style="text-align: center;">
-        <a class="btn btn-default" href="/">Về trang chủ</a>
+            <a class="btn btn-default" href="/invoice/update-failed/{{invoice}}">Về trang chủ</a>
+            {{invoice}}
         </p>
     {{/if}}
-    
 </div>

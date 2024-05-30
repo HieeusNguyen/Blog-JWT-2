@@ -4,7 +4,7 @@ const courseRouter = require("./course");
 const meRouter = require("./me");
 const authRouter = require("./auth")
 const bikeRouter = require("./bike")
-const { requireAuth, checkUser } = require("../middlewares/UserMiddlewares");
+const { requireAuth, checkUser, checkAdmin } = require("../middlewares/UserMiddlewares");
 const cartRouter = require("./cart")
 const invoiceRouter = require("./invoice")
 

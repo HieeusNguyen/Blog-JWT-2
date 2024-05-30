@@ -4,6 +4,10 @@ const cartControllers = require("../app/controllers/CartController");
 const { default: mongoose } = require("mongoose");
 const Invoice = require("../app/models/Invoice");
 const Cart = require("../app/models/Cart");
+if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
 
 router.post("/order", cartControllers.addToCart);
 router.get("/order", cartControllers.getCart)
@@ -91,7 +95,10 @@ router.post('/create_payment_url', function (req, res, next) {
 
     const invoice = new Invoice(dataInvoice);
         invoice.save()
-        .then()
+        .then(invoice => {
+    const invoiceId = invoice._id.toString(); 
+    localStorage.setItem('myFirstKey', invoiceId);
+  })
         .catch(next);
 
         Cart.deleteMany({userId: new mongoose.Types.ObjectId(JSON.parse(req.body.items)[0].userId)})
@@ -110,7 +117,6 @@ router.post('/create_payment_url', function (req, res, next) {
 });
 
 
- 
 router.get('/vnpay_return', function (req, res, next) {
     var vnp_Params = req.query;
 
@@ -154,13 +160,10 @@ router.get('/vnpay_return', function (req, res, next) {
     var signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");     
 
     if(secureHash === signed){
-
-        res.render('cart/success', {code: vnp_Params['vnp_ResponseCode']})
+        res.render('cart/success', {code: vnp_Params['vnp_ResponseCode'], invoice: localStorage.getItem('myFirstKey')})
     } else{
-        res.render('cart/success', {code: '97'})
+        res.render('cart/success', {code: '97', invoice: localStorage.getItem('myFirstKey')})
     }
 });
-
-
 
 module.exports = router;

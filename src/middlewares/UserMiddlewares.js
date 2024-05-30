@@ -47,4 +47,26 @@ const checkUser = (req, res, next) => {
   }
 };
 
-module.exports = { requireAuth, checkUser };
+const checkAdmin = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, 'net ninja secret', async (err, decodedToken) => {
+      if (err) {
+        res.send("You are not admin")
+      } else {
+        let user = await User.findById(decodedToken.id);
+        const objectUser = user.toObject();
+        res.locals.user = objectUser;
+        if(objectUser.admin){
+          next()
+        }else{
+          res.send("You are not admin")
+        }
+      }
+    });
+  } else {
+    res.send("You are not admin")
+  }
+};
+
+module.exports = { requireAuth, checkUser, checkAdmin };

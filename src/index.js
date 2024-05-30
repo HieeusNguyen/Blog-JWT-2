@@ -41,6 +41,7 @@ app.engine(
         helpers: {
             sum: (a, b) => a + b,
             multiple: (a, b) => a * b,
+            eq: (a, b) => a === b
         },
     })
 );
@@ -51,9 +52,9 @@ Handlebars.registerHelper('totalPrice', function(data) {
     });
     return total;
     });
-    Handlebars.registerHelper('eq', function(a, b) {
-        return a === b;
-    });
+    // Handlebars.registerHelper('eq', function(a, b) {
+    //     return a === b;
+    // });
     Handlebars.registerHelper('jsonStringify', function(context) {
         return JSON.stringify(context);
     });

@@ -29,6 +29,7 @@
         "method-override": "^3.0.0",
         "mongoose": "^8.2.0",
         "mongoose-slug-generator": "^1.0.4",
+        "node-localstorage": "^3.0.5",
         "session-mongoose": "^0.5.2",
         "sweetalert2": "^11.11.0",
         "validator": "^13.11.0"
